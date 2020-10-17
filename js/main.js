@@ -20,10 +20,40 @@ $(document).ready(function () {
     responsive: {0: {items:2}, 760:{items:4}, 992:{items:6}},
   });
 
-  // Dark Mode
+  // Start Dark Mode
+
+  var Mode
+  if (localStorage.getItem("mode")) {
+    Mode = localStorage.getItem("mode")
+    $("body").addClass(Mode)
+  } else {
+    Mode = $("body").attr("class")
+    localStorage.setItem("mode", Mode)
+  }
+//  Switch the logo image
+  var logo = $(".logo img")
+  if ($('body').hasClass('light-mode')) {
+    logo.attr("src", "img/logo-dark.png")
+  } else {
+    logo.attr("src", "img/logo.png")
+  }
+
   $(".dark .fa-adjust").on("click", function () {
-    $("body").toggleClass("dark-mode");
+    if ($("body").hasClass("light-mode")) {
+      $("body").removeClass("light-mode");
+      logo.attr("src", "img/logo.png")
+      Mode = $("body").attr("class") 
+    localStorage.setItem("mode", Mode)
+      
+    } else {
+      $("body").addClass("light-mode");
+      logo.attr("src", "img/logo-dark.png")
+      Mode = $("body").attr("class") 
+      localStorage.setItem("mode", Mode)
+    }
   });
+  
+  // End Dark Mode
   // Side Menu Transition
   $(".menu").on("click", function () {
     $(".side-menu").addClass("menu-transition")
@@ -43,8 +73,9 @@ $(document).ready(function () {
       $(".nav-top").fadeOut(500);
     }
   })
+  // Counter
   const counters = document.querySelectorAll(".about .num");
-  const delay = 200;
+  const delay = 250;
   counters.forEach((counter) => {
     const updateCount = () => {
       const target = counter.getAttribute('data-target');
