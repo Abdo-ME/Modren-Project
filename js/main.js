@@ -32,25 +32,40 @@ $(document).ready(function () {
   }
 //  Switch the logo image
   var logo = $(".logo img")
-  if ($('body').hasClass('light-mode')) {
-    logo.attr("src", "img/logo-dark.png")
-  } else {
-    logo.attr("src", "img/logo.png")
+  const chackImage = () => {
+    if ($('body').hasClass('light-mode')) {
+      logo.attr("src", "img/logo-dark.png")
+    } else {
+      logo.attr("src", "img/logo.png")
+    }
   }
+  chackImage()
 
   $(".dark .fa-adjust").on("click", function () {
+    // if ($("body").hasClass("light-mode")) {
+    //   $("body").removeClass("light-mode");
+    //   logo.attr("src", "img/logo.png")
+    //   Mode = $("body").attr("class") 
+    // localStorage.setItem("mode", Mode)
+      
+    // } else {
+    //   $("body").addClass("light-mode");
+    //   logo.attr("src", "img/logo-dark.png")
+    //   Mode = $("body").attr("class") 
+    //   localStorage.setItem("mode", Mode)
+    // }
     if ($("body").hasClass("light-mode")) {
       $("body").removeClass("light-mode");
-      logo.attr("src", "img/logo.png")
-      Mode = $("body").attr("class") 
+      chackImage()
+  Mode = $("body").attr("class") 
     localStorage.setItem("mode", Mode)
-      
-    } else {
+     } else {
       $("body").addClass("light-mode");
-      logo.attr("src", "img/logo-dark.png")
+      chackImage()
       Mode = $("body").attr("class") 
       localStorage.setItem("mode", Mode)
     }
+    
   });
   
   // End Dark Mode
@@ -59,7 +74,7 @@ $(document).ready(function () {
     $(".side-menu").addClass("menu-transition")
    
   })
-  $(".side-menu .icon").on("click", function () {
+  $(".side-menu i").on("click", function () {
     $(".side-menu").removeClass("menu-transition")
    
   })
@@ -101,12 +116,27 @@ $(document).ready(function () {
 
   
 });
+// Button To Top Scroll
+$(window).scroll(function () {
+  if ($(window).scrollTop() >= 1000) {
+    $(".btn-top").fadeIn(1000);
+  } else {
+    $(".btn-top").fadeOut(1000);
+  }
+});
 
-function birthdayCakeCandles(candles) {
-  // to get the duplicate item
-  const x=candles.filter((item, index) => candles.indexOf(item) !== index);
-  // to filter (x) in the array then get the length
-  const y = candles.filter((el) => el == x[0]);
-  return y.length
-}
-birthdayCakeCandles([3,2,1,3])
+$(".btn-top").on('click', function () {
+  $("html,body").animate({
+   scrollTop: $(".header").offset().top, 
+  })
+})
+
+// Side Menu Scroll
+
+$('.links li').on("click", function () {
+  var target = $(this).attr("data-target")
+  // console.log()
+  $("html,body").animate({
+    scrollTop :$("." + target).offset().top-50
+  })
+})
