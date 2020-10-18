@@ -410,13 +410,13 @@ li:hover::before {
   background-size: cover;
 }
 .testimonials .card-one {
-  background-image: url(/img/testimonials/01.jpg);
+  background-image: url(img/testimonials/01.jpg);
 }
 .testimonials .card-two {
-  background-image: url(/img/testimonials/02.jpg);
+  background-image: url(img/testimonials/02.jpg);
 }
 .testimonials .card-three {
-  background-image: url(/img/testimonials/03.jpg);
+  background-image: url(img/testimonials/03.jpg);
 }
 .testimonials .overlay {
   position: absolute;
